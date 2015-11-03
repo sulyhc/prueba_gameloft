@@ -1,0 +1,111 @@
+<div class="row">
+	<div class="col-md-10">
+		<h1 class="page-header"> Empleados </h1>
+	</div>
+	<div class="col-md-2">
+		<br />
+		<small>
+			<button onclick="modalNvoEmp()" class="btn btn-success">
+				<i class="fa fa-plus"></i><i class="fa fa-user"></i>
+			</button> </small>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<ul class="nav nav-pills">
+					<li class="active">
+						<a href="#home-pills" data-toggle="tab">Administracion</a>
+					</li>
+					<li class="">
+						<a href="#profile-pills" data-toggle="tab">Lenguajes y Cursos </a>
+					</li>
+				</ul>
+
+				<div class="tab-content">
+					<div class="tab-pane fade active in" id="home-pills">
+						<h4>Gesti&oacute;n de Empleados</h4>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>clave</th>
+									<th>Empleado</th>
+									<th>Puesto</th>
+									<th>Salario</th>
+									<th>Acciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>Gurmencio Lopez Nava</td>
+									<td>contador</td>
+									<td>$1500.00</td>
+									<td>
+									<div class="btn-group" role="group" aria-label="...">
+										<button type="button" class="btn btn-primary">
+											<i class="fa fa-book"></i>
+										</button>
+										<button type="button" class="btn btn-info">
+											<i class="fa fa-edit"></i>
+										</button>
+										<button type="button" class="btn btn-danger">
+											<i class="fa fa-remove"></i>
+										</button>
+									</div></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="tab-pane fade" id="profile-pills">
+						<h4>Ver Aptitudes de Empleados</h4>
+						<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>clave</th>
+									<th>Empleado</th>
+									<th>Puesto</th>
+									<th style="width: 45%">Cursos</th>
+									<th>Acciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>Gurmencio Lopez Nava</td>
+									<td>contador</td>
+									<td>
+										<button style="margin: 3px" class="btn btn-danger btn-xs">Certificacion en python</button>
+										<button style="margin: 3px" class="btn btn-primary btn-xs">Bases NoSql y PHP</button>
+										<button style="margin: 3px" class="btn btn-info btn-xs">Seguridad con PHP y JQuery</button>
+										<button style="margin: 3px" class="btn btn-success btn-xs">...</button>
+									</td>
+									<td>
+									<div class="btn-group" role="group" aria-label="...">
+
+										<button type="button" class="btn btn-danger">
+											<i class="fa fa-bar-chart-o"></i>
+										</button>
+										<button type="button" class="btn btn-success">
+											<i class="fa fa-cogs"></i>
+										</button>
+									</div></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modalNvoEmp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
+<script>
+	jQuery(document).ready(function($) {
+		$('#tags').tagsInput();
+	});
+	
+</script>

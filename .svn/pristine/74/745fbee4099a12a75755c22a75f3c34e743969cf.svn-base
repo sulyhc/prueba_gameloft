@@ -1,0 +1,119 @@
+<div class="row">
+	<div class="col-md-10">
+		<h1 class="page-header"> Cursos y Lenguajes </h1>
+	</div>
+	<div class="col-md-2">
+		<br />
+		<small>
+			<button onclick="modalNvoLenguaje()" class="btn btn-success">
+				<i class="fa fa-code"></i>
+			</button> </small>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+                        <div class="panel-body">
+                            <ul class="nav nav-pills">
+                                <li class="active"><a href="#home-pills" data-toggle="tab">Lenguajes</a>
+                                </li>
+                                <li class=""><a href="#profile-pills" data-toggle="tab">Estadisticas</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="home-pills">
+                                    <h4>Lenguajes Registrados</h4>
+                                    <div class="row">
+                                    	<div class="col-md-10">
+                                    		<div class="table-responsive">
+                                    		<table class="table">
+                                    			<thead>
+                                    				<tr>
+                                    					<th>#</th>
+                                    					<th>Lenguaje</th>
+                                    					<th>No Participantes</th>
+                                    					<th>Acciones</th>
+                                    				</tr>
+                                    			</thead>
+                                    			<tbody>
+                                    				<tr>
+                                    					<td>1</td>
+                                    					<td>PHP</td>
+                                    					<td>3</td>
+                                    					<td>
+                                    						<div class="btn-group" role="group" aria-label="...">
+										<button type="button" class="btn btn-primary">
+											<i class="fa fa-users"></i>
+										</button>
+										<button type="button" class="btn btn-success">
+											<i class="fa fa-book"></i>
+										</button>
+										<button type="button" class="btn btn-info">
+											<i class="fa fa-edit"></i>
+										</button>
+										<button type="button" class="btn btn-danger">
+											<i class="fa fa-remove"></i>
+										</button>
+									</div>                                    						
+                                    					</td>
+                                    				</tr>
+                                    			</tbody>
+                                    		</table>
+                                    		</div>
+                                    	</div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="profile-pills">
+                                    <h4>Estadisticas</h4>
+                                    <div class="row">
+                                    	<div class="col-md-6 col-sm-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Participantes por Lenguaje
+                        </div>
+                        <div class="panel-body">
+                            <div id="myfirstchart" style="height: 350px;width: 450px"></div>
+                        </div>
+                    </div>
+                </div>
+                                    	<div class="col-md-6 col-sm-6">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            Cursos por Lenguaje
+                        </div>
+                        <div class="panel-body">
+                            <div id="mysecondchart" style="height: 350px;width: 450px"></div>
+                        </div>
+                    </div>
+                </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>		
+	</div>
+</div>
+
+<!-- Modal nuevo lenguaje -->
+<div class="modal fade" id="modalNvoLen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	</div>
+
+<script>
+	Morris.Donut({
+  element: 'myfirstchart',
+  data: [
+    {label: "Download Sales", value: 12},
+    {label: "In-Store Sales", value: 30},
+    {label: "Mail-Order Sales", value: 20}
+  ]
+});
+Morris.Donut({
+  element: 'mysecondchart',
+  data: [
+    {label: "Download Sales", value: 12},
+    {label: "In-Store Sales", value: 30},
+    {label: "Mail-Order Sales", value: 20}
+  ]
+});
+</script>

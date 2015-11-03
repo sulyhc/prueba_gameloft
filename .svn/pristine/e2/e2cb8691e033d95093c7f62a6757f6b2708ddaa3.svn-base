@@ -1,0 +1,9 @@
+<?php 
+include_once("../controller/cEmpleados.php");
+$emple = new cEmpleados();
+$curso = 0;
+if(isset($_POST['curso'])){
+	$curso = 1;
+}
+$emple->addCursoEmp($_POST['idemp'], $curso,  $_POST['porcentaje'],$_POST['lenguaje']);
+?>

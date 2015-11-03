@@ -1,0 +1,64 @@
+var mainC = "#page-inner";
+//contenedor principal
+
+//carga la interfaz para la gestion de empleados
+function gestionEmpleados() {
+	$.ajax({
+		type : "POST",
+		url : "view/vEmpleados.php",
+		success : function(data) {
+			$(mainC).html(data);
+		}
+	});
+}
+
+//carga la interfaz para revisar los cursos registrados
+function verCursos() {
+	$.ajax({
+		type : "POST",
+		url : "view/vCursos.php",
+		success : function(data) {
+			$(mainC).html(data);
+		}
+	});
+}
+
+//carga la interfaz para revisar los puestos registrados
+function verPuestos() {
+	$.ajax({
+		type : "POST",
+		url : "view/vPuestos.php",
+		success : function(data) {
+			$(mainC).html(data);
+		}
+	});
+}
+
+//abre el modal para registrar un nuevo empleado
+function modalNvoEmp() {
+	$.ajax({
+		type : "POST",
+		url : "helper/modalNvoEmp.php",
+		success : function(data) {
+			$("#modalNvoEmp").html(data);
+			$("#modalNvoEmp").modal("show");
+		}
+	});
+}
+
+//abre un modal para registrar nuevo lenguaje
+function modalNvoLenguaje(){
+	$.ajax({
+		type : "POST",
+		url : "helper/modalNvoLenguaje.php",
+		success : function(data) {
+			$("#modalNvoLen").html(data);
+			$("#modalNvoLen").modal("show");
+		}
+	});
+}
+
+$(document).ready(function() {
+	gestionEmpleados();
+});
+

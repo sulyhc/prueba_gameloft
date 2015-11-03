@@ -1,0 +1,62 @@
+<?php
+include_once("Database.php"); 
+/**
+ * clase que gestiona y da altas los puestos
+ *
+ * @package model
+ * @author  Walter
+ */
+class mPuestos {
+	/**
+	 * funcion que registra un nuevo puesto a un empleado por su ID
+	 *
+	 * @return void
+	 * @author  
+	 */
+	function regPuesto($idEmp,$puesto,$salario) {
+		$query = "insert into tbl_datos_economicos(puesto,salario,tbl_empleado_id) values('$puesto',$salario,$idEmp )";
+		$con = conn();
+		$con->exec($query);
+		echo $query;
+	}
+	
+	/**
+	 * funcion que edita el puesto de un empleado
+	 *
+	 * @return void
+	 * @author  
+	 */
+	function editPuesto($idEmp,$puesto,$salario) {
+		$query = "update tbl_datos_economicos set puesto='$puesto',
+					salario=$salario where tbl_empleado_id = $idEmp ";
+		$con = conn();
+		$con->exec($query);
+	}
+	
+	/**
+	 * funcion que elimina el puesto de un empleado
+	 *
+	 * @return void
+	 * @author  
+	 */
+	function deletePuesto($idEmp) {
+		$query = "delete from tbl_datos_economicos where tbl_empleado_id = $idEmp ";
+		$con = conn();
+		$con->exec($query);
+	}
+	
+	/**
+	 * funcion que lista los puestos registrados
+	 *
+	 * @return array
+	 * @author  Walter
+	 */
+	function getPuestos(){
+		$con = conn();
+		$query = "select bt.puesto, count(bt.tbl_empleado_id) as numer  from tbl_datos_economicos as bt group by bt.puesto";
+		$r = $con->query($query);
+		return $r->fetchAll();
+	}
+	
+} // END
+?>

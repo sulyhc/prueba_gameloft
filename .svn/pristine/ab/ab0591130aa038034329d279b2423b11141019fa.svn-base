@@ -1,0 +1,15 @@
+<?php
+//ciclo que escribe los tags de los conocimientos
+foreach($conoc as $cc){
+	$st = "btn-danger";
+	if($cc['curso'] == 0){
+		$st = "btn-primary";
+	}
+	//escribe el nombre del conocimiento o lenguaje
+?>
+										<button style="margin: 3px" class="btn <?php echo $st; ?> btn-xs"><?php echo $cc['lenguaje'] ?></button>
+										<?php
+											}
+ ?>
+										
+		

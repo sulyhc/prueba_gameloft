@@ -1,0 +1,75 @@
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title">Registrar Nuevo Empleado</h4>
+		</div>
+		<div class="modal-body">
+			<form id="formNvoEmp">
+			<div class="row">
+				<!-- nombre-->
+				<div class="col-md-7">
+					<div class="form-group">
+						<label for="">Nombre(s)</label>
+						<input name="nempleado" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<!-- fecha de nacimiento-->
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="">Fecha de Nacimiento</label>
+						<input name="fnac" class="form-control" />
+					</div>
+				</div>
+				<!-- edad-->
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="">Edad</label>
+						<input name="edad" type="number" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-7">
+					<div class="form-group">
+						<label for="">Direccion</label>
+						<textarea name="direccion" class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<div class="form-group">
+						<label for="">Telefono</label>
+						<input name="telefono" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="">Puesto</label>
+						<input name="puesto" class="form-control" />
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="">Salario</label>
+						<input name="salario" class="form-control" />
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">
+				Cancelar
+			</button>
+			<button onclick="regNvoEmp('formNvoEmp')" type="button" class="btn btn-primary">
+				Registrar
+			</button>
+		</div>
+	</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

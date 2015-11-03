@@ -1,0 +1,86 @@
+ <?php
+include_once ("../controller/cEmpleados.php");
+$empl = new cEmpleados();
+$e = $empl->getEmple($_POST['idEmp']);
+ ?>
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<h4 class="modal-title">Editando datos de: <?php echo $e['nombre'] ?></h4>
+		</div>
+		<div class="modal-body">
+			<form id="formEditEmp">
+				<input type="hidden" name="idEmp" value="<?php echo $_POST['idEmp'] ?>" />
+			<div class="row">
+				<!-- nombre-->
+				<div class="col-md-7">
+					<div class="form-group">
+						<label for="">Nombre(s)</label>
+						<input name="nempleado" class="form-control" value="<?php echo $e['nombre'] ?>" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<!-- fecha de nacimiento-->
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="">Fecha de Nacimiento</label>
+						<input name="fnac" class="form-control" value="<?php echo $e['fecha_nacimiento'] ?>" />
+					</div>
+				</div>
+				<!-- edad-->
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="">Edad</label>
+						<input name="edad" type="number" class="form-control" value="<?php echo $e['edad'] ?>" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-7">
+					<div class="form-group">
+						<label for="">Direccion</label>
+						<textarea name="direccion" class="form-control"><?php echo $e['direccion'] ?></textarea>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<div class="form-group">
+						<label for="">Telefono</label>
+						<input name="telefono" class="form-control" value="<?php echo $e['telefono'] ?>"/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="">Puesto</label>
+						<input name="puesto" class="form-control" value="<?php echo $e['puesto'] ?>" />
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="">Salario</label>
+						<input name="salario" class="form-control" value="<?php echo $e['salario'] ?>" />
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">
+				Cancelar
+			</button>
+			<button id="btnNvoEmp" type="button" class="btn btn-primary">
+				Registrar
+			</button>
+		</div>
+	</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+<script>
+	$("#btnNvoEmp").click(function() {
+		regNvoEmp('formEditEmp');
+		});
+</script>

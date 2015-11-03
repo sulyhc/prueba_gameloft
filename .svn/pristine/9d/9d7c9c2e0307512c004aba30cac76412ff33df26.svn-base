@@ -1,0 +1,31 @@
+var mainC = "#page-inner";
+//contenedor principal
+
+//carga la interfaz para la gestion de empleados
+function gestionEmpleados() {
+	$.ajax({
+		type : "POST",
+		url : "view/vEmpleados.php",
+		success : function(data) {
+			$(mainC).html(data);
+		}
+	});
+	$('#tags').tagsInput();
+}
+
+//abre el modal para registrar un nuevo empleado
+function modalNvoEmp() {
+	$.ajax({
+		type : "POST",
+		url : "helper/modalNvoEmp.php",
+		success : function(data) {
+			$("#modalNvoEmp").html(data);
+			$("#modalNvoEmp").modal("show");
+		}
+	});
+}
+
+$(document).ready(function() {
+	gestionEmpleados();
+});
+

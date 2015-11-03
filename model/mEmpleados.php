@@ -1,0 +1,136 @@
+<?php
+include_once ("Database.php");
+include_once ("mPuestos.php");
+include_once ("mCursos.php");
+/**
+ * clase modelo que maneja altas bajas y ediciones de empleados
+ *
+ * @package model
+ * @author  Walter
+ */
+class mEmpleados {
+
+	private $cursos;
+	//variable privada para la clase cursos
+	private $puestos;
+	//variable privada para la clase puestos
+
+	function __construct() {
+		$this -> cursos = new mCursos();
+		$this -> puestos = new mPuestos();
+	}
+
+	/**
+	 * Funcion que lista los empleados registrados en la base de datos de acuerdo a su status
+	 *
+	 * @return array
+	 * @author  Walter
+	 */
+
+	function getEmpleados($status) {
+		$con = conn();
+		$query = "select e.id,e.nombre,d.puesto,d.salario from tbl_empleado as e, 
+		tbl_datos_economicos as d where d.tbl_empleado_id = e.id and e.estado= $status";
+		$r = $con -> query($query);
+		return $r -> fetchAll();
+	}
+
+	/**
+	 * Funcion que registra un nuevo empleado y su puesto (por defecto pone el estado activo)
+	 *
+	 * @return int
+	 * @author  Walter
+	 */
+	function regEmpleado($nombre, $edad, $fnac, $direccion, $telefono, $puesto, $salario) {
+		$query = "insert into tbl_empleado(nombre,edad,direccion,estado,fecha_nacimiento,telefono)
+	 				values('$nombre',$edad,'$direccion',1,'$fnac','$telefono')";
+		$con = conn();
+		$con -> exec($query);
+		$idEmp = $con -> lastInsertId();
+		echo $query;
+		$this -> puestos -> regPuesto($idEmp, $puesto, $salario);
+
+	}
+
+	/**
+	 * Funcion que actualiza los datos de un empleado y su puesto (sin cambiar su estado)
+	 *
+	 * @return int
+	 * @author  Walter
+	 */
+	function editEmpleado($nombre, $edad, $fnac, $direccion, $telefono, $puesto, $salario, $idEmp) {
+		$query = "update tbl_empleado set nombre = '$nombre',edad = $edad,direccion='$direccion',
+	 				fecha_nacimiento='$fnac',telefono= '$telefono' where id = $idEmp";
+		$con = conn();
+		$con -> exec($query);
+		$this -> puestos -> editPuesto($idEmp, $puesto, $salario);
+
+	}
+
+	/**
+	 * Funcion que elimina a un empleado
+	 *
+	 * @return int
+	 * @author  Walter
+	 */
+	function deleteEmpleado($idEmp) {
+		$this -> cursos -> deleteAllCursosEmp($idEmp);
+		$this -> puestos -> deletePuesto($idEmp);
+		$query = "delete from tbl_empleado where id = $idEmp";
+		$con = conn();
+		$con -> exec($query);
+
+	}
+
+	/**
+	 * Funcion que registra un curso o conocimiento a un empleado
+	 *
+	 * @return void
+	 * @author  Walter
+	 */
+	function regCursoEmp($idEmp, $curso, $porcentaje, $idLenguaje) {
+		$this -> cursos -> regCursoEmp($idEmp, $curso, $porcentaje, $idLenguaje);
+	}
+
+	/**
+	 * Funcion que obtiene a un empleado
+	 *
+	 * @return array
+	 * @author  Walter
+	 */
+	function getEmp($idEmp) {
+		$query = "select e.id,e.nombre,e.direccion,e.telefono,e.fecha_nacimiento,e.edad,e.estado,t.puesto,t.salario
+ 				from tbl_datos_economicos as t, tbl_empleado as e where t.tbl_empleado_id = e.id and e.id = $idEmp";
+		$con = conn();
+		$r = $con -> query($query);
+		return $r -> fetch();
+	}
+
+/**
+	 * Funcion que obtiene los cursos de un empleado
+	 *
+	 * @return array
+	 * @author  Walter
+	 */
+	function getConocimientosEmp($idEmp) {
+		$query = "select l.lenguaje, t.porcentaje,t.id,t.curso from tbl_conocimientos as t, tbl_lenguajes as l where t.tbl_lenguajes_id = l.id
+					and t.tbl_empleado_id = $idEmp";
+		$con = conn();
+		$r = $con -> query($query);
+		return $r -> fetchAll();
+	}
+	
+	/**
+	 * Funcion que elimina un curso de un empleado
+	 *
+	 * @return void
+	 * @author  Walter
+	 */
+	 function deleteCurso($idCurso){
+	 	$this->cursos->deleteCursosEmp($idCurso);
+		
+	 }
+	
+
+} // END
+?>

@@ -1,0 +1,27 @@
+<?php 
+include_once("../model/mPuestos.php");
+/**
+ * clase controladora de los puestos
+ *
+ * @package controller
+ * @author  Walter
+ */
+class cPuestos {
+	
+	private $mPuesto;
+	
+	//constructor 
+	function __construct(){
+		$this->mPuesto = new mPuestos();
+	}
+	
+	function listaPuestos(){
+		return $this->mPuesto->getPuestos();
+	}
+	
+	function listaEmpePuesto($puesto){
+		return $this->mPuesto->getEmplePuesto($puesto);
+	}
+	
+} // END
+?>

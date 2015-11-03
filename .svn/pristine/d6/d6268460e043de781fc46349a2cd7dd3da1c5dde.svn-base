@@ -1,0 +1,73 @@
+<?php
+include_once("Database.php");
+/**
+ * clase que gestiona los lenguajes de programacion y tecnologias manejadas en los cursos
+ *
+ * @package model
+ * @author  Walter
+ */
+class mLenguajes {
+
+	/**
+	 * agrega un nuevo lenguaje
+	 *
+	 * @return void
+	 * @author
+	 */
+	function addLenguaje($lenguaje) {
+		$query = "insert into tbl_lenguajes (lenguaje) values('$lenguaje')";
+		echo $query;
+		$con = conn();
+		$con->exec($query);
+	}
+
+	/**
+	 * elimina un lenguaje extistente
+	 *
+	 * @return int
+	 * @author  Walter
+	 */
+	function removeLenguaje($idLeng) {
+		$r = 1;
+			$query = "delete from tbl_lenguajes where id = $idLeng";
+		$con = conn();
+		$msj = "ACCION REALIZADA CON EXITO";
+		$n = $con->exec($query);
+		if($n != 1) {
+			$msj = "EL LENGUAJE YA TIENE ELEMENTOS ASIGNADOS, NO SE PUEDE ELIMINAR";
+		} 
+		return $msj;
+	}
+	
+	/**
+	 * lista todos los lenguajes del sistema con sus numeros de participantes
+	 *
+	 * @return void
+	 * @author  
+	 */
+	function getLenguajes(){
+		$query = "select l.id,l.lenguaje from tbl_lenguajes as l";
+		$con = conn();
+		$r = $con->query($query);
+		return $r->fetchAll();
+	}
+	
+	function getFrecLenguajes($curso){
+		$query = "select l.id,l.lenguaje, count(c.curso) as num_participantes
+				from tbl_lenguajes as l, tbl_conocimientos as c where c.tbl_lenguajes_id = l.id
+				and c.curso = $curso
+				group by l.id";
+		$con = conn();
+		$r = $con->query($query);
+		return $r->fetchAll();
+	}
+	
+	function getLeng($id){
+		$query = "select * from tbl_lenguajes where id = $id";
+		$con = conn();
+		$r = $con->query($query);
+		return $r->fetch();		
+	}
+
+} // END
+?>

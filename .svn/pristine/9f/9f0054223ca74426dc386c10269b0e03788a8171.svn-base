@@ -1,0 +1,5 @@
+<?php 
+include_once("../controller/cEmpleados.php");
+$emple = new cEmpleados();
+$emple->altaEmp($_POST['nempleado'], $_POST['edad'], $_POST['fnac'], $_POST['direccion'], $_POST['telefono'], $_POST['puesto'], $_POST['salario']);
+?>

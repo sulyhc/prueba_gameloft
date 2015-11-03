@@ -1,0 +1,6 @@
+<?php 
+//registra un nuevo lenguaje
+include_once("../controller/cLenguajes.php");
+$leng = new cLenguajes();
+$leng->altaLenguaje($_POST['lenguaje']);
+?>

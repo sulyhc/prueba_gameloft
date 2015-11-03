@@ -1,0 +1,218 @@
+var mainC = "#page-inner";
+//contenedor principal
+
+//carga la interfaz para la gestion de empleados
+function gestionEmpleados() {
+	$.ajax({
+		type : "POST",
+		url : "view/vEmpleados.php",
+		success : function(data) {
+			$(mainC).html(data);
+		}
+	});
+}
+
+//carga la interfaz para revisar los cursos registrados
+function verCursos() {
+	$.ajax({
+		type : "POST",
+		url : "view/vCursos.php",
+		success : function(data) {
+			$(mainC).html(data);
+		}
+	});
+}
+
+//carga la interfaz para revisar los puestos registrados
+function verPuestos() {
+	$.ajax({
+		type : "POST",
+		url : "view/vPuestos.php",
+		success : function(data) {
+			$(mainC).html(data);
+		}
+	});
+}
+
+//abre el modal para registrar un nuevo empleado
+function modalNvoEmp() {
+	$.ajax({
+		type : "POST",
+		url : "helper/modalNvoEmp.php",
+		success : function(data) {
+			$("#modalNvoEmp").html(data);
+			$("#modalNvoEmp").modal("show");
+		}
+	});
+}
+
+//abre el modal para editar un nuevo empleado
+function modalEditEmp(id) {
+	$.ajax({
+		type : "POST",
+		url : "helper/modalEditEmp.php",
+		data:{"idEmp":id},
+		success : function(data) {
+			$("#modalNvoEmp").html(data);
+			$("#modalNvoEmp").modal("show");
+		}
+	});
+}
+
+//abre un modal para registrar nuevo lenguaje
+function modalNvoLenguaje(){
+	$.ajax({
+		type : "POST",
+		url : "helper/modalNvoLenguaje.php",
+		success : function(data) {
+			$("#modalNvoLen").html(data);
+			$("#modalNvoLen").modal("show");
+		}
+	});
+}
+
+//abre un modal para editar un lenguaje
+function modalEditLenguaje(id){
+	$.ajax({
+		type : "POST",
+		url : "helper/modalNvoLenguaje.php",
+		data:{"idLeng":id},
+		success : function(data) {
+			$("#modalNvoLen").html(data);
+			$("#modalNvoLen").modal("show");
+		}
+	});
+}
+
+//abre un modal para registrar un curso a un empleado
+function modalNvoCurso(idemp){
+	$.ajax({
+		type:"POST",
+		url:"helper/modalAddCurso.php",
+		data:{"idEmp":idemp},
+		success:function(data){
+			$("#modalNvoCurso").html(data);
+			$("#modalNvoCurso").modal("show");
+		}
+	});
+}
+
+//modal dinamico que solicita la confirmacion del usuario para eliminar un registro (puede ser empleado, lenguaje o conocimiento)
+function modalConfirmacionDelete(id,modal,ubicacion){
+	$.ajax({
+		type:"POST",
+		url:"helper/modalConfDelete.php",
+		data:{"id":id,"lugar":ubicacion,"modal":modal},
+		success:function(data){
+			$("#"+modal).html(data);
+			$("#"+modal).modal("show");
+		}
+	});
+}
+
+//modal para ver los detalles de un empleado
+function modalEmpleado(id){
+	$.ajax({
+		type:"POST",
+		url:"helper/modalEmpleado.php",
+		data:{"idEmp":id},
+		success:function(data){
+			$("#modalNvoEmp").html(data);
+			$("#modalNvoEmp").modal("show");
+		}
+	});
+}
+
+//modal que permite ver los empleados miembros de un puesto o lenguaje
+function modalVerMiembros(tipo,id,modal){
+	$.ajax({
+		type:"POST",
+		url:"helper/modalParticipantes.php",
+		data:{"tipo":tipo,"id":id},
+		success:function(data){
+			$("#"+modal).html(data);
+			$("#"+modal).modal("show");
+		}
+	});
+}
+
+//modal que permite ver las estadisticas de cursos de un empleado
+function modalChartEmp(id){
+	$.ajax({
+		type:"POST",
+		url:"helper/modalEstadisticas.php",
+		data:{"id":id},
+		success:function(data){
+			$("#modalChartEmp").html(data);
+			$("#modalChartEmp").modal("show");
+		}
+	});
+}
+
+//agrega un nuevo empleado
+function regNvoEmp(formu){
+	$.ajax({
+		type:"POST",
+		url:"helper/regEmp.php",
+		data : $("#"+formu).serialize(),
+		success:function(data){
+			$("#modalNvoEmp").modal("hide");
+			$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+			gestionEmpleados();
+		}
+	});
+}
+
+//agrega un nuevo lenguaje
+function regNvoLeng(inputLeng){
+	$.ajax({
+		type:"POST",
+		url:"helper/regLenguaje.php",
+		data:$("#"+inputLeng).serialize(),
+		success:function(data){
+			$("#modalNvoLen").modal("hide");
+			$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+			verCursos();
+		}
+	});
+}
+
+//agrega un nuevo curso
+function regCurso(formu,id){
+	$.ajax({
+		type:"POST",
+		url:"helper/regCurso.php",
+		data : $(formu).serialize(),
+		success:function(data){
+			$("#modalNvoCurso").modal("hide");
+			$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+$("#tagsE"+id).html(data);
+		}
+	});
+}
+
+//accion que elimina un elemento
+function deleteElemento(id,lugar,modal){
+	$.ajax({
+		type:"POST",
+		url:"helper/deleteElemento.php",
+		data : {"id":id,"lugar":lugar},
+		success:function(data){
+			$("#"+modal).modal("hide");
+			$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+			alert(data);
+			$(".TB"+id).remove();
+		}
+	});
+}
+
+
+//metodo principal al inicio
+$(document).ready(function() {
+	gestionEmpleados();
+});
+

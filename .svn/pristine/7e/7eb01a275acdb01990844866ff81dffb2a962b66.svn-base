@@ -1,0 +1,28 @@
+<?php
+$limit = 20; //limita el numero de elementos a mostrar
+$i = 0; //contador para limitar los elementos
+//ciclo que escribe los tags de los conocimientos
+foreach($conoc as $cc){
+	$i++;
+	//si se cumple el limite rompe el ciclo
+	if($i == $limit){
+		break;
+	}
+	$st = "btn-danger";
+	if($cc['curso'] == 0){
+		$st = "btn-primary";
+	}
+	//escribe el nombre del conocimiento o lenguaje
+?>
+										<button style="margin: 3px" class="btn <?php echo $st; ?> btn-xs"><?php echo $cc['lenguaje'] ?></button>
+										<?php
+											}
+ ?>
+										
+				<?php 
+				
+				//si el numero de conocimientos supera al limite escribe un boton para mostrar el resto
+				if( count($conoc)>=$limit){
+					?><button style="margin: 3px" class="btn btn-success btn-xs">...</button> <?php
+					};
+ ?>

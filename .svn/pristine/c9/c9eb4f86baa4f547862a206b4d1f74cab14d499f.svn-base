@@ -1,0 +1,65 @@
+<?php
+include_once("../model/mLenguajes.php"); 
+/**
+ * controlador para la gestion de lenguajes 
+ *
+ * @package controller
+ * @author  WALTER
+ */
+class cLenguajes {
+	
+	private $mLeng ;
+	
+	//constructor que inicia las variables privadas
+	function __construct(){
+		$this->mLeng = new mLenguajes();
+	}
+	
+	/**
+	 * registra un nuevo lenguaje
+	 *
+	 * @return void
+	 * @author  
+	 */
+	function altaLenguaje($lenguaje) {
+		$this->mLeng->addLenguaje($lenguaje);
+	}
+	
+	/**
+	 * lista todos los  lenguajes registrados
+	 *
+	 * @return array
+	 * @author  
+	 */	
+	function listaLenguajes(){
+		return $this->mLeng->getLenguajes();
+	}
+	
+	/**
+	 * borra un  lenguaje
+	 *
+	 * @return int
+	 * @author  
+	 */
+	function borraLenguaje($idLeng){
+		return $this->mLeng->removeLenguaje($idLeng);
+	}
+	
+	function getLengu($id){
+		return $this->mLeng->getLeng($id);
+	}
+	
+	function editLeng($id,$lenguaje){
+		$this->mLeng->editLeng($id, $lenguaje);
+	}
+	
+	function getEmps($id, $tipo){
+		return $this->mLeng->getEmps($id, $tipo);
+	}
+	
+	function getNumEmpsLeng($tipo){
+		return $this->mLeng->getNumsConoc($tipo);
+	}
+	
+} // END
+?>

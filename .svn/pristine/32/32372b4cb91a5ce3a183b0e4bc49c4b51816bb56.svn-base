@@ -1,0 +1,54 @@
+ <?php
+//modal dinamico que permite dar de alta o editar un lenguaje o tecnologia
+$nleng = "";
+//variable para el nombre del lenguaje por defecto esta vacia si se tratase de una alta
+
+$titulo = "Registrar Nuevo Lenguaje/Tecnolog&iacute;a";
+//titulo por defecto para las altas
+$idL = -1;
+//id del lenguaje a editar por defecto es -1 si se tratase de una alta
+//checa si se ha solicitado una edicion
+//si se ha enviado el id de un determinado lenguaje se trata de una edicion
+if (isset($_POST['idLeng'])) {
+	include_once ("../controller/cLenguajes.php");
+	$leng = new cLenguajes();
+	$lng = $leng -> getLengu($_POST['idLeng']);
+	$titulo = "MODIFICANDO LENGUAJE/TECNOLOGÍA: " . $lng['lenguaje'];
+	$nleng = $lng['lenguaje'];
+	$idL = $lng['id'];
+}
+ ?>
+ <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><?php echo $titulo ?></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+        	<div class="col-md-6 col-md-offset-3">        		
+        	<form id="formuLengs">
+        		<div class="form-group" id="fglenguaje">
+        		<label class="control-label" for="lenguaje">Nombre del Lenguaje/Tecnolog&iacute;a</label>
+        		<input id="lenguaje" onkeyup="validarVacio('lenguaje','btnLeng')" name="lenguaje" aria-describedby="hplenguaje" class="form-control" value="<?php echo $nleng ?>" />
+        		<span class="help-block" id="hblenguaje"></span>
+        		<input  name="idLeng" type="hidden" value="<?php echo $idL ?>" />
+        		</form>
+        		</div>
+        	</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button  type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button id="btnLeng" type="button" class="btn btn-primary">Registrar</button>
+      </div>
+    </div>
+  </div>
+<script>
+	$("#btnLeng").click(function() {
+		var vali = validarVacio('lenguaje', 'btnLeng');
+		if (vali == 1) {
+			regNvoLeng("formuLengs");
+		}
+	}); 
+</script>
